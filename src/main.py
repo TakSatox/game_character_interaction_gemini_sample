@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from models.healthcheck_model import HealthCheckModel
 from api.v1.api import api_router
 
-
+# Create FastAPI App
 app = FastAPI(title="Character Interaction with Gemini")
 
 # Health check
