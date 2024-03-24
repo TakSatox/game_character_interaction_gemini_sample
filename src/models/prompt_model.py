@@ -1,5 +1,10 @@
 from pydantic import BaseModel
+from datetime import date
+
 
 class PromptModel(BaseModel):
-    text: str
-    created_at: str
+    prompt: str
+    created_at: date
+
+class ResponseUpdatePromptModel(BaseModel):
+    message: str

@@ -3,7 +3,7 @@ from crud.characters_spec import CharactersSpec
 from models.characters_model import CharacterModel, CharactersModelList
 
 
-#Router Decorator
+# Router Decorator
 router = APIRouter()
 
 # Get
@@ -11,7 +11,6 @@ router = APIRouter()
 async def get_character_info(char_name: str):
     characters= CharactersSpec()
     character_info = characters.get_character_info(char_name)
-
     if character_info:
         return character_info
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Character not found")
@@ -21,7 +20,6 @@ async def get_character_info(char_name: str):
 async def list_characters_names():
     characters = CharactersSpec()
     characters_name = characters.list_characters_name()   
-
     if characters_name:
         return {"characters": characters_name}
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="The 'characters' collection is empty or does not exist")

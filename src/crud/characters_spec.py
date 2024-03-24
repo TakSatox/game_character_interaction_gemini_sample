@@ -11,7 +11,7 @@ class CharactersSpec:
         pass
 
     def get_character_info(self, char_name):
-        character_info = self.firestore_api.get_document_by_field("char_name", char_name)
+        character_info = self.firestore_api.get_document_values_by_field("char_name", char_name)
         return character_info
     
     def list_characters_name(self):
