@@ -1,6 +1,7 @@
 from fastapi import APIRouter, status, HTTPException
 from crud.characters_spec import CharactersSpec
-from models.characters_model import CharacterModel, CharactersModelList
+from schemas.characters_schema import CharactersSchema
+from models.characters_model import CharacterModel, CharactersModelList, ResponsePostCharacterModel
 
 
 # Router Decorator
@@ -23,3 +24,10 @@ async def list_characters_names():
     if characters_name:
         return {"characters": characters_name}
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="The 'characters' collection is empty or does not exist")
+
+# Post
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=ResponsePostCharacterModel)
+async def add_new_character(payload: CharactersSchema):
+    characters = CharactersSpec()
+    return characters.add_character(char_name=payload.character_name, char_context=payload.character_context)
+

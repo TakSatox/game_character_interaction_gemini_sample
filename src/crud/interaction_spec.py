@@ -26,7 +26,7 @@ class InteractionSpec:
             return ""
         formatted_prompt = prompt.format(
             char_name = char_name,
-            char_context = char_context,
+            char_context = char_context.get("context"),
             question = question
         )
         print("Prompt text sent to Gemini:", formatted_prompt)

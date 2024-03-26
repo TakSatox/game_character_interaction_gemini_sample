@@ -18,3 +18,14 @@ class CharactersSpec:
         characters = self.firestore_api.list_documents()
         characters_name = [item.get("char_name") for item in characters]
         return characters_name
+    
+    def add_character(self, char_name, char_context):
+        character_document = {
+            "char_name": char_name,
+            "context": char_context
+        }
+        try:
+            self.firestore_api.add_document(character_document)
+            return {"message": "The new character was added successfully"}
+        except Exception as e:
+            print(e)
