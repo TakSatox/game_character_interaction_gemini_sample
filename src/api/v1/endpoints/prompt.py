@@ -1,7 +1,8 @@
 from fastapi import APIRouter, status, HTTPException
+from crud.prompt_spec import PromptSpec
 from schemas.prompt_schema import PromptSchema
 from models.prompt_model import PromptModel, ResponseUpdatePromptModel
-from crud.prompt_spec import PromptSpec
+
 
 
 # Router Decorator
