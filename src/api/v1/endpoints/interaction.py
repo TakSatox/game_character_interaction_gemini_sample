@@ -9,4 +9,10 @@ router = APIRouter()
 # Get
 @router.post("/{char_name}", status_code=status.HTTP_200_OK, response_model=InteractionModel)
 async def get_character_response(char_name: str, payload: InteractionSchema):
-    pass
+    interaction = InteractionSpec()
+    formatted_prompt = interaction.format_prompt(char_name=char_name, question=payload.question)
+
+    if formatted_prompt:
+        response = interaction.ask_gemini(formatted_prompt)
+        return {"response": response}
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Character not found or the 'prompts' collection is empty")
