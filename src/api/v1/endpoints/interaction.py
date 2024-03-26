@@ -14,5 +14,5 @@ async def get_character_response(char_name: str, payload: InteractionSchema):
 
     if formatted_prompt:
         response = interaction.ask_gemini(formatted_prompt)
-        return {"response": response}
+        return {"character_response": response}
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Character not found or the 'prompts' collection is empty")

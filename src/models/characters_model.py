@@ -8,3 +8,6 @@ class CharacterModel(BaseModel):
 
 class CharactersModelList(BaseModel):
     characters: List[str]
+
+class ResponsePostCharacterModel(BaseModel):
+    message: str
