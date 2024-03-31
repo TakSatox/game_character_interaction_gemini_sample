@@ -15,8 +15,9 @@ class FirestoreApi:
     def get_document_values_by_field(self, field, value):
         docs_ref = self.collection_ref.where(filter=FieldFilter(field_path=field, op_string="==", value=value)).get()
         query_result = [doc.to_dict() for doc in docs_ref]
-        doc = query_result[0]
-        return doc
+        if query_result:
+            return query_result[0]
+        return {}
     
     def list_documents(self):
         docs = self.collection_ref.get()
