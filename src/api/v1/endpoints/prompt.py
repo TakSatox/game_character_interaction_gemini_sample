@@ -2,6 +2,7 @@ from fastapi import APIRouter, status, HTTPException
 from crud.prompt_spec import PromptSpec
 from schemas.prompt_schema import PromptSchema
 from models.prompt_model import PromptModel, ResponseUpdatePromptModel
+from core.errors_handling.models.not_found import NotFoundModel
 
 
 
@@ -9,7 +10,11 @@ from models.prompt_model import PromptModel, ResponseUpdatePromptModel
 router = APIRouter()
 
 # Get
-@router.get("/", status_code=status.HTTP_200_OK, response_model=PromptModel)
+@router.get("/", status_code=status.HTTP_200_OK, response_model=PromptModel, responses={
+    status.HTTP_404_NOT_FOUND: {
+        "model": NotFoundModel
+    }
+})
 async def get_prompt_template():
     prompts = PromptSpec()
     prompt = prompts.get_prompt()

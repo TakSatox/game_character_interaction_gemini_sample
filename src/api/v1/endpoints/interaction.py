@@ -2,12 +2,17 @@ from fastapi import APIRouter, status, HTTPException
 from crud.interaction_spec import InteractionSpec
 from schemas.interaction_schema import InteractionSchema
 from models.interaction_model import InteractionModel
+from core.errors_handling.models.not_found import NotFoundModel
 
 
 router = APIRouter()
 
 # Get
-@router.post("/{char_name}", status_code=status.HTTP_200_OK, response_model=InteractionModel)
+@router.post("/{char_name}", status_code=status.HTTP_200_OK, response_model=InteractionModel, responses={
+    status.HTTP_404_NOT_FOUND: {
+        "model": NotFoundModel
+    }
+})
 async def get_character_response(char_name: str, payload: InteractionSchema):
     interaction = InteractionSpec()
     formatted_prompt = interaction.format_prompt(char_name=char_name, question=payload.question)
